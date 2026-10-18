@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-clip border-x border-b-2 bg-background px-6 pb-24 pt-20 sm:px-10 sm:pb-28 sm:pt-24">
+    <main className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-clip border-b-2 bg-background px-6 pb-24 pt-20 sm:px-10 sm:pb-28 sm:pt-24">
       <NotFoundContent />
     </main>
   );

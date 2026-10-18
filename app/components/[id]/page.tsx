@@ -137,7 +137,7 @@ export default async function ComponentDetailPage({
     <HomeSectionRail items={railItems} activeId={component.id} />
     <main
       id={`component-${component.id}`}
-      className="relative flex min-h-dvh flex-col gap-y-4 overflow-x-clip border-x border-b-2 bg-background pt-14 pb-12"
+      className="relative flex min-h-dvh flex-col gap-y-4 overflow-x-clip border-b-2 bg-background pt-14 pb-12"
     >
       {/* Breadcrumb */}
       <div className="px-6 pt-4 border-t border-dashed">

@@ -96,7 +96,7 @@ export default function TestimonialsPage() {
     <>
       <main
         id="testimonials"
-        className="relative flex min-h-dvh flex-col gap-y-4 overflow-x-clip border-x bg-background pt-14"
+        className="relative flex min-h-dvh flex-col gap-y-4 overflow-x-clip bg-background pt-14"
       >
         <script
           type="application/ld+json"

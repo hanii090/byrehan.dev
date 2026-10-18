@@ -73,7 +73,7 @@ export default function SponsorRoute() {
   return (
     <main
       id="sponsor"
-      className="relative flex min-h-dvh flex-col overflow-x-clip border-x border-b-2 bg-background pt-14"
+      className="relative flex min-h-dvh flex-col overflow-x-clip border-b-2 bg-background pt-14"
     >
       <script
         type="application/ld+json"
