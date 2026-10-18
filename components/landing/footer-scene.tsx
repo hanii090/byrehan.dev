@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Fragment, type ReactNode } from "react";
 import { motion, useReducedMotion, useSpring, type Variants } from "motion/react";
-import { DiscordStatus } from "@/components/landing/discord-status";
+import { ContactStatus } from "@/components/landing/contact-status";
 import { footerConfig } from "@/config/site";
 import { MOTION_EASE } from "@/lib/motion";
 
@@ -129,7 +129,7 @@ export function FooterScene({ children }: { children: ReactNode }) {
           variants={itemVariants}
           className="mt-7 w-full max-w-[19rem]"
         >
-          <DiscordStatus />
+          <ContactStatus />
         </motion.div>
 
         <motion.div

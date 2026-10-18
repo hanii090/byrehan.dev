@@ -126,7 +126,7 @@ export const siteConfig: PortfolioConfig = {
     firstName: "Rehan",
     avatar: {
       src: "/images/profile-cutout.webp",
-      alt: "Portrait placeholder for Rehan Aslam",
+      alt: "Illustrated portrait of Rehan waving with a laptop",
       fallback: "RA",
     },
     location: {

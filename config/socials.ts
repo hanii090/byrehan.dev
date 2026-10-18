@@ -72,12 +72,9 @@ export const socialsConfig: SocialLink[] = [
   {
     id: "discord",
     platform: "Discord",
-    handle: "@t1x_faker",
+    handle: "",
     icon: "discord",
     action: "copy",
-    copyValue: "t1x_faker",
-    shortcutKey: "C",
-    tooltipDefault: "Copy username",
     order: 7,
     enabled: false,
   },
