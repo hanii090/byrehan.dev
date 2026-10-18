@@ -42,7 +42,7 @@ export function ContactStatus() {
           Building in public.
         </p>
         <p className="truncate text-[11px] leading-tight text-muted-foreground">
-          Message on LinkedIn or email, I reply when I can.
+          LinkedIn or email works.
         </p>
       </div>
       <Link

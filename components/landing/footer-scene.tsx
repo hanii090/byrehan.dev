@@ -127,7 +127,7 @@ export function FooterScene({ children }: { children: ReactNode }) {
         <motion.div
           data-reveal=""
           variants={itemVariants}
-          className="mt-7 w-full max-w-[19rem]"
+          className="mt-6 w-full max-w-sm"
         >
           <ContactStatus />
         </motion.div>
@@ -135,7 +135,7 @@ export function FooterScene({ children }: { children: ReactNode }) {
         <motion.div
           data-reveal=""
           variants={itemVariants}
-          className="mt-5 flex flex-col items-center gap-1 sm:flex-row sm:gap-6"
+          className="mt-4 flex flex-col items-center gap-1 sm:flex-row sm:gap-6"
         >
           <p className="text-center font-mono text-[11px] leading-relaxed tracking-[0.06em] text-muted-foreground">
             {footerConfig.credit}
@@ -161,9 +161,10 @@ export function FooterScene({ children }: { children: ReactNode }) {
         }}
         onPointerLeave={resetGarden}
         onPointerCancel={resetGarden}
-        className="relative -mt-6 h-70 select-none overflow-hidden sm:-mt-12 sm:h-80"
+        className="relative mt-8 h-56 select-none overflow-hidden sm:mt-10 sm:h-72"
       >
-        <div className="relative left-1/2 h-full w-[calc(100%+24px)] min-w-180 -translate-x-1/2">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-16 bg-linear-to-b from-background to-transparent" />
+        <div className="relative left-1/2 h-full w-[calc(100%+48px)] min-w-[44rem] -translate-x-1/2">
           <motion.div
             className="h-full origin-bottom"
             style={{
@@ -177,9 +178,10 @@ export function FooterScene({ children }: { children: ReactNode }) {
               alt=""
               width={footerConfig.artwork.width}
               height={footerConfig.artwork.height}
-              sizes="(max-width: 719px) 720px, 792px"
-              className="block h-auto w-full max-w-none"
+              sizes="(max-width: 719px) 900px, 1100px"
+              className="block h-full w-full max-w-none object-cover object-[center_70%]"
               draggable={false}
+              priority={false}
             />
           </motion.div>
         </div>
@@ -188,7 +190,7 @@ export function FooterScene({ children }: { children: ReactNode }) {
             pill. A sibling of the parallaxing artwork, not a child of it, so
             the garden shifts behind still glass. The inset wrapper lets the
             pill size against the full stage instead of half its width. */}
-        <div className="absolute inset-x-4 top-1/2 z-10 flex -translate-y-1/2 justify-center">
+        <div className="absolute inset-x-4 bottom-8 z-10 flex justify-center sm:bottom-10">
           {children}
         </div>
       </motion.div>

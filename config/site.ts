@@ -39,8 +39,8 @@ export const footerConfig: FooterConfig = {
   credit: "Made with <3 and lots of coffee.",
   artwork: {
     src: "/images/footer-garden-strip.webp",
-    width: 1264,
-    height: 600,
+    width: 2000,
+    height: 662,
   },
 };
 
