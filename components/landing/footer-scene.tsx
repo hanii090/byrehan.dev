@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, type ReactNode } from "react";
-import { motion, useReducedMotion, useSpring, type Variants } from "motion/react";
+import type { ReactNode } from "react";
+import { motion, type Variants } from "motion/react";
 import { ContactStatus } from "@/components/landing/contact-status";
 import { footerConfig } from "@/config/site";
 import { MOTION_EASE } from "@/lib/motion";
@@ -23,7 +23,6 @@ const gardenVariants: Variants = {
     transition: { duration: 1.1, ease: MOTION_EASE },
   },
 };
-const parallaxSpring = { stiffness: 100, damping: 22, mass: 0.8 };
 const wordVariants: Variants = {
   hidden: { opacity: 0, y: 6, filter: "blur(4px)" },
   visible: {
@@ -33,19 +32,20 @@ const wordVariants: Variants = {
     transition: { duration: 0.65, ease: MOTION_EASE },
   },
 };
+const staggerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12 },
+  },
+};
+const quoteStaggerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.075 },
+  },
+};
 
 export function FooterScene({ children }: { children: ReactNode }) {
-  const reducedMotion = useReducedMotion();
-  const x = useSpring(0, parallaxSpring);
-  const y = useSpring(0, parallaxSpring);
-  const rotate = useSpring(0, parallaxSpring);
-
-  const resetGarden = () => {
-    x.set(0);
-    y.set(0);
-    rotate.set(0);
-  };
-
   return (
     <footer
       data-footer-reveal=""
@@ -86,57 +86,53 @@ export function FooterScene({ children }: { children: ReactNode }) {
         </defs>
       </svg>
       <motion.div
-        className="relative z-10 mx-auto flex max-w-[var(--frame-max-w)] flex-col items-center px-6 pt-14 sm:pt-20"
+        className="relative z-10 mx-auto flex max-w-[var(--frame-max-w)] flex-col items-center gap-7 px-6 pt-14 sm:gap-8 sm:pt-16"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.5, margin: "0px 0px -120px 0px" }}
-        variants={{ visible: { transition: { staggerChildren: 0.16 } } }}
+        viewport={{ once: true, amount: 0.35 }}
+        variants={staggerVariants}
       >
-        <figure className="max-w-sm text-center">
-          <motion.blockquote
-            className="text-balance font-serif text-[1.75rem] italic leading-snug text-foreground sm:text-[2rem]"
-            variants={{ visible: { transition: { staggerChildren: 0.075 } } }}
-          >
-            <p>
-              <span className="sr-only">{footerConfig.quote}</span>
-              <span aria-hidden="true">
-                {footerConfig.quote.split(" ").map((word, index) => (
-                  <Fragment key={`${word}-${index}`}>
-                    {index > 0 && " "}
-                    <motion.span
-                      data-reveal=""
-                      className="inline-block"
-                      variants={wordVariants}
-                    >
-                      {word}
-                    </motion.span>
-                  </Fragment>
-                ))}
-              </span>
-            </p>
-          </motion.blockquote>
-          <motion.figcaption
-            data-reveal=""
-            variants={itemVariants}
-            className="mt-4 font-mono text-[10px] tracking-[0.12em] text-muted-foreground"
-          >
-            {footerConfig.attribution}
-          </motion.figcaption>
+        <figure className="max-w-lg text-center">
+          <blockquote>
+            <motion.p
+              aria-label={footerConfig.quote}
+              variants={quoteStaggerVariants}
+              className="text-balance font-serif text-[1.75rem] italic leading-snug text-foreground sm:text-[2rem]"
+            >
+              {footerConfig.quote.split(" ").map((word, index) => (
+                <motion.span
+                  key={`${word}-${index}`}
+                  data-reveal=""
+                  aria-hidden="true"
+                  className="inline-block"
+                  style={index > 0 ? { marginLeft: "0.3em" } : undefined}
+                  variants={wordVariants}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
+          </blockquote>
+          {footerConfig.attribution ? (
+            <motion.figcaption
+              data-reveal=""
+              variants={itemVariants}
+              className="mt-3 font-mono text-[10px] tracking-[0.12em] text-muted-foreground"
+            >
+              {footerConfig.attribution}
+            </motion.figcaption>
+          ) : null}
         </figure>
 
         <motion.div
           data-reveal=""
           variants={itemVariants}
-          className="mt-6 w-full max-w-sm"
+          className="w-full max-w-sm"
         >
           <ContactStatus />
         </motion.div>
 
-        <motion.div
-          data-reveal=""
-          variants={itemVariants}
-          className="mt-4 flex flex-col items-center gap-1 sm:flex-row sm:gap-6"
-        >
+        <motion.div data-reveal="" variants={itemVariants}>
           <p className="text-center font-mono text-[11px] leading-relaxed tracking-[0.06em] text-muted-foreground">
             {footerConfig.credit}
           </p>
@@ -149,47 +145,23 @@ export function FooterScene({ children }: { children: ReactNode }) {
         variants={gardenVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.35, margin: "0px 0px -120px 0px" }}
-        onPointerMove={(event) => {
-          if (reducedMotion || event.pointerType === "touch") return;
-          const bounds = event.currentTarget.getBoundingClientRect();
-          const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
-          const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
-          x.set(horizontal * 16);
-          y.set(vertical * 8);
-          rotate.set(horizontal * 1.2);
-        }}
-        onPointerLeave={resetGarden}
-        onPointerCancel={resetGarden}
-        className="relative mt-8 h-56 select-none overflow-hidden sm:mt-10 sm:h-72"
+        viewport={{ once: true, amount: 0.35 }}
+        className="relative mt-6 w-full select-none sm:mt-8"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-16 bg-linear-to-b from-background to-transparent" />
-        <div className="relative left-1/2 h-full w-[calc(100%+48px)] min-w-[44rem] -translate-x-1/2">
-          <motion.div
-            className="h-full origin-bottom"
-            style={{
-              x: reducedMotion ? 0 : x,
-              y: reducedMotion ? 0 : y,
-              rotate: reducedMotion ? 0 : rotate,
-            }}
-          >
-            <Image
-              src={footerConfig.artwork.src}
-              alt=""
-              width={footerConfig.artwork.width}
-              height={footerConfig.artwork.height}
-              sizes="(max-width: 719px) 900px, 1100px"
-              className="block h-full w-full max-w-none object-cover object-[center_70%]"
-              draggable={false}
-              priority={false}
-            />
-          </motion.div>
-        </div>
+        <Image
+          src={footerConfig.artwork.src}
+          alt=""
+          width={footerConfig.artwork.width}
+          height={footerConfig.artwork.height}
+          sizes="100vw"
+          className="block h-auto w-full max-w-none"
+          draggable={false}
+          priority={false}
+        />
 
         {/* The visitor count floats centered over the panorama as a glass
-            pill. A sibling of the parallaxing artwork, not a child of it, so
-            the garden shifts behind still glass. The inset wrapper lets the
-            pill size against the full stage instead of half its width. */}
+            pill. Inset wrapper sizes the pill against the full stage. */}
         <div className="absolute inset-x-4 bottom-8 z-10 flex justify-center sm:bottom-10">
           {children}
         </div>

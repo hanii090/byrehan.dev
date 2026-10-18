@@ -19,7 +19,6 @@ import Social from "@/components/landing/social";
 import { SponsorsSection } from "@/components/landing/sponsors";
 import { Testimonials } from "@/components/landing/testimonials";
 import { Vader } from "@/components/landing/vader";
-import { PixelDissolve } from "@/components/ui/pixel-dissolve";
 import { SideNote } from "@/components/shared/side-note";
 import { projectsConfig, projectsSectionConfig } from "@/config/projects";
 import { sectionNotes } from "@/config/section-notes";
@@ -128,10 +127,6 @@ export default function Home() {
           })),
         ]}
       />
-      <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 mx-auto w-full max-w-[var(--frame-max-w)]">
-        <div aria-hidden="true" className="bottom-blur" />
-        <PixelDissolve />
-      </div>
     </>
   );
 }

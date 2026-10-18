@@ -34,13 +34,14 @@ export const aboutItems: AboutItem[] = [
 ];
 
 export const footerConfig: FooterConfig = {
-  quote: "The soul becomes dyed with the color of its thoughts.",
-  attribution: "Marcus Aurelius",
+  quote:
+    "The questions that stay with us become the things we spend our lives making.",
+  attribution: "",
   credit: "Made with <3 and lots of coffee.",
   artwork: {
     src: "/images/footer-garden-strip.webp",
-    width: 2000,
-    height: 662,
+    width: 1024,
+    height: 343,
   },
 };
 
