@@ -1,7 +1,6 @@
 "use client";
 
 import { socialsConfig } from "@/config/socials";
-import { siteConfig } from "@/config/site";
 import { trackEvent } from "@/lib/analytics";
 import { FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
@@ -26,7 +25,7 @@ export function ContactStatus() {
       <div className="relative size-7 shrink-0">
         <div className="flex size-full items-center justify-center overflow-hidden rounded-md bg-muted">
           <Image
-            src={siteConfig.personal.avatar.src}
+            src="/images/daedalus-workbench.webp"
             alt=""
             width={28}
             height={28}

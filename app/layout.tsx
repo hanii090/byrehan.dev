@@ -1,5 +1,4 @@
 import { BottomNav } from "@/components/landing/bottom-nav";
-import { FrameGutters } from "@/components/shared/frame-gutters";
 import { PostHogProvider } from "@/components/shared/posthog-provider";
 import { SiteHeader } from "@/components/shared/site-header";
 import { ThemeProvider } from "@/components/shared/theme-provider";
@@ -167,9 +166,8 @@ export default function RootLayout({
           <TooltipProvider>
             <PostHogProvider>
               <SiteHeader />
-              <FrameGutters />
               <div className="relative mx-auto w-full max-w-[var(--frame-max-w)]">
-                <div className="relative w-full border-x bg-muted/20">
+                <div className="relative w-full border-x bg-background">
                   {children}
                 </div>
                 <BottomNav />
