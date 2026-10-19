@@ -24,7 +24,7 @@ go to [http://localhost:3000](http://localhost:3000).
 
 ## contact
 
-dm me on [x](https://x.com/haani0090), find me on [linkedin](https://www.linkedin.com/in/nothanii9/), or [email](mailto:contact@byrehan.dev).
+dm me on [x](https://x.com/haani0090), find me on [linkedin](https://www.linkedin.com/in/nothanii9/), or [email](mailto:support@ummahsignal.com).
 
 cheers
 rehan
