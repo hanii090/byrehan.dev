@@ -17,7 +17,7 @@
     "@tiptap/pm": "3.31.4",
     "@tiptap/react": "3.31.4",
     "@tiptap/starter-kit": "3.31.4",
-    "@vercel/analytics": "^1.6.1",
+    "@vercel/analytics": "^2.0.1",
     "avvvatars-react": "^0.4.2",
     "boring-avatars": "^2.0.4",
     "class-variance-authority": "^0.7.1",
