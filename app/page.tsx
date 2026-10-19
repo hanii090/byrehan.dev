@@ -69,10 +69,8 @@ const staticSections: Record<Exclude<SectionId, "github">, ReactElement> = {
 };
 
 export default function Home() {
-  const showGithub =
-    siteConfig.sectionFlags.github && Boolean(process.env.GITHUB_TOKEN);
   const visibleSections = siteConfig.sectionOrder.filter(
-    (id) => siteConfig.sectionFlags[id] && (id !== "github" || showGithub),
+    (id) => siteConfig.sectionFlags[id],
   );
 
   return (
@@ -87,10 +85,7 @@ export default function Home() {
           <Hero />
         </div>
         {siteConfig.sectionOrder.map((sectionId) => {
-          if (
-            !siteConfig.sectionFlags[sectionId] ||
-            (sectionId === "github" && !showGithub)
-          ) {
+          if (!siteConfig.sectionFlags[sectionId]) {
             return null;
           }
 

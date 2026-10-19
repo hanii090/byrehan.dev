@@ -158,8 +158,9 @@ The home page is a loop, not a hand-written layout.
 - Every non-GitHub section has an entry in the `staticSections` map in
   `app/page.tsx`, keyed by `SectionId` .
 - `github` is special: it is server-fetched, wrapped in React Suspense with
-  `components/skeletons/github-skeleton.tsx`, and only rendered when
-  `GITHUB_TOKEN` is present.
+  `components/skeletons/github-skeleton.tsx`. A `GITHUB_TOKEN` uses the
+  GraphQL calendar. Without one, the same section renders from the public
+  GitHub contributions page.
 - The current order is projects, components, skills, about, github,
   testimonials, bookmarks, socials, sponsors. Certifications, experience,
   services, workflow and contact exist but are flagged off. The `sponsors`
@@ -448,7 +449,7 @@ Rules:
 
 | Variable | Used by | Behaviour when missing |
 | --- | --- | --- |
-| `GITHUB_TOKEN` | `lib/github.ts`, `app/page.tsx` | The GitHub section is skipped entirely, by design, not a bug |
+| `GITHUB_TOKEN` | `lib/github.ts` | The calendar falls back to the public GitHub contributions page |
 | `DISCORD_USER_ID` | `app/api/discord-status/route.ts` | Falls back to a hardcoded user id |
 | `VERCEL_TOKEN` | `app/api/visitor-count/route.ts` | The footer visitor counter stays hidden (the route returns null counts) |
 | `VERCEL_PROJECT_ID` | `app/api/visitor-count/route.ts` | Same as above; both vars are required to query the Web Analytics count endpoint |

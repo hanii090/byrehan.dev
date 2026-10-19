@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  BookmarkCheckIcon,
   Contrast,
   FolderOpen,
   Home,
@@ -61,6 +62,13 @@ export function SiteCommandPalette({
             icon: <Home className="size-4" />,
             keywords: ["landing", "start", "top"],
             onSelect: go("/"),
+          },
+          {
+            id: "go-bookmarks",
+            label: "Bookmarks",
+            icon: <BookmarkCheckIcon className="size-4" />,
+            keywords: ["bookmark", "bookmarks", "saved", "links", "reading"],
+            onSelect: go("/#bookmarks"),
           },
         ],
       },

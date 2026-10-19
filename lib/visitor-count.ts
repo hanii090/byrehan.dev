@@ -5,7 +5,7 @@
 
 const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
 const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID;
-const VERCEL_TEAM_ID = process.env.VERCEL_TEAM_ID;
+const VERCEL_TEAM_ID = process.env.VERCEL_TEAM_ID || process.env.VERCEL_ORG_ID;
 
 export async function getVisitorCount(): Promise<number | null> {
   // Without credentials the counter stays hidden in the UI instead of

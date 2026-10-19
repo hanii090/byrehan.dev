@@ -42,12 +42,64 @@ type GitHubGraphQLResponse = {
   };
 };
 
+/** Read the public contribution calendar. Tooltips carry the real count. */
+export function parseContributionCalendar(html: string): Contribution[] {
+  const contributions: Contribution[] = [];
+  const contributionDay =
+    /data-date="(\d{4}-\d{2}-\d{2})"[\s\S]*?<\/td>\s*<tool-tip\b[^>]*>([^<]*)<\/tool-tip>/g;
+
+  for (const match of html.matchAll(contributionDay)) {
+    const date = match[1];
+    const label = match[2]?.trim() ?? "";
+    const countMatch = /^(\d+)\s+contribution/.exec(label);
+    const count = countMatch ? Number(countMatch[1]) : 0;
+    if (!date) continue;
+    contributions.push({ date, count });
+  }
+
+  return contributions;
+}
+
+async function fetchPublicContributions(
+  username: string,
+): Promise<Contribution[]> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+
+  try {
+    const response = await fetch(
+      `https://github.com/users/${encodeURIComponent(username)}/contributions`,
+      {
+        headers: {
+          Accept: "text/html",
+          "User-Agent":
+            "Mozilla/5.0 (compatible; byrehan.dev/1.0; +https://byrehan.dev)",
+        },
+        next: { revalidate: 3600 },
+        signal: controller.signal,
+      },
+    );
+
+    if (!response.ok) {
+      console.error("GitHub contributions page failed:", response.status);
+      return [];
+    }
+
+    return parseContributionCalendar(await response.text());
+  } catch {
+    console.error("GitHub contributions page failed.");
+    return [];
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export async function fetchGithubData(
   username: string,
 ): Promise<Contribution[]> {
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
-    throw new Error("GITHUB_TOKEN is missing");
+    return fetchPublicContributions(username);
   }
 
   const now = new Date();
@@ -74,28 +126,32 @@ export async function fetchGithubData(
 
     if (!response.ok) {
       console.error("GitHub API request failed:", response.status);
-      return [];
+      return fetchPublicContributions(username);
     }
 
     const json: GitHubGraphQLResponse = await response.json();
 
     if (json.errors) {
       console.error("GitHub API Errors:", json.errors);
-      return [];
+      return fetchPublicContributions(username);
     }
 
     const weeks =
       json.data?.user?.contributionsCollection?.contributionCalendar?.weeks ??
       [];
 
-    return weeks.flatMap((week) =>
+    const contributions = weeks.flatMap((week) =>
       week.contributionDays.map((day) => ({
         date: day.date,
         count: day.contributionCount,
       })),
     );
+
+    return contributions.length > 0
+      ? contributions
+      : fetchPublicContributions(username);
   } catch {
     console.error("GitHub API request failed.");
-    return [];
+    return fetchPublicContributions(username);
   }
 }
