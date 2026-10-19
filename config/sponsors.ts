@@ -39,12 +39,17 @@ export const sponsorTiers: SponsorTier[] = [
  * and the deploy picks it up. Hand-edited sponsors stay in `sponsorsConfig`
  * below and are merged ahead of the generated ones.
  */
+/** Live Stripe checkout used by the supporter button. */
+export const sponsorCheckoutUrl =
+  "https://buy.stripe.com/cNiaEY1E95MR6eg8pu0sU00";
+
 export const sponsorsSectionConfig: SponsorsSectionConfig = {
   label: "Supporter",
   heading: "Supported by",
   description: "Kind people helping keep the work free and independent.",
   supportLabel: "Become a supporter",
-  supportNote: "Once. Here for good.",
+  supportNote: "Stripe checkout",
+  supportUrl: sponsorCheckoutUrl,
   seats: 6,
   tiers: sponsorTiers,
 };
@@ -106,8 +111,15 @@ export const sponsorPageConfig: SponsorPageConfig = {
 export const orbitSeatProductId = process.env.DODO_ORBIT_SEAT_PRODUCT_ID ?? "";
 
 export const sponsorsConfig: Sponsor[] = [
-  // Hand-edited sponsors. `logo` is an optional square image src; paid
-  // sponsors that have not claimed yet fall back to an Avvvatars shape.
+  {
+    id: "mobbin",
+    name: "Mobbin",
+    url: "https://mobbin.com",
+    logo: "/sponsors/mobbin.png",
+    seat: 0,
+    order: 1,
+    enabled: true,
+  },
 ];
 
 /** Every sponsor in authored order: hand-edited first, then webhook-paid. */

@@ -2,7 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 import { socialsConfig } from "@/config/socials";
-import { sponsorTiers } from "@/config/sponsors";
+import { sponsorCheckoutUrl } from "@/config/sponsors";
 import { revealOnMount } from "@/lib/motion";
 import {
   ArrowRight,
@@ -39,11 +39,7 @@ const X_HANDLE = socialsConfig.find((social) => social.id === "x");
 const X_URL = X_HANDLE?.href ?? "https://x.com/haani0090";
 const MAX_LOGO_BYTES = 512 * 1024;
 const ACCEPTED_LOGO_TYPES = ["image/png", "image/jpeg", "image/webp"];
-const CHECKOUT_HREF = "/api/sponsor-checkout";
-const SEAT_PRICE =
-  sponsorTiers.find((tier) => tier.enabled !== false)?.price ??
-  sponsorTiers[0]?.price ??
-  5;
+const CHECKOUT_HREF = sponsorCheckoutUrl;
 const DRAFT_KEY = "akoder:sponsor-claim-draft";
 
 type ClaimDraft = {
@@ -652,7 +648,7 @@ export function ClaimForm() {
                         Already paid, or still need a seat?
                       </p>
                       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                        {`If you already paid, wait a minute and try again. If you have not, take a $${SEAT_PRICE} seat and you will return here.`}
+                        If you already paid, wait a minute and try again. If you have not, continue on Stripe.
                       </p>
                       <a
                         href={CHECKOUT_HREF}
@@ -665,12 +661,7 @@ export function ClaimForm() {
                           if (checkingOut) return;
                           setCheckingOut(true);
                           saveDraft({ paymentId });
-                          // Full-page navigation: the route 302s to Dodo's
-                          // hosted checkout, which a client router would try
-                          // to render instead of following.
-                          window.location.assign(
-                            new URL(CHECKOUT_HREF, window.location.origin),
-                          );
+                          window.location.assign(CHECKOUT_HREF);
                         }}
                       >
                         {checkingOut ? (
@@ -680,7 +671,7 @@ export function ClaimForm() {
                           </>
                         ) : (
                           <>
-                            Take a ${SEAT_PRICE} seat
+                            Pay with Stripe
                             <ArrowUpRight aria-hidden className="size-4" />
                           </>
                         )}

@@ -333,6 +333,8 @@ export interface SponsorsSectionConfig {
   description: string;
   supportLabel: string;
   supportNote: string;
+  /** Hosted Stripe checkout for the supporter button. */
+  supportUrl: string;
   seats: number;
   tiers: SponsorTier[];
 }

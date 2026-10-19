@@ -4,8 +4,8 @@ import BitBlob from "@/components/landing/bit";
 import { EmitRays, SponsorsSection } from "@/components/landing/sponsors";
 import { socialsConfig } from "@/config/socials";
 import {
+    sponsorCheckoutUrl,
     sponsorPageConfig,
-    sponsorTiers,
 } from "@/config/sponsors";
 import { trackEvent } from "@/lib/analytics";
 import { reveal } from "@/lib/motion";
@@ -14,16 +14,9 @@ import { ArrowRight, ArrowUpRight } from "@/components/shared/site-icons";
 import { motion } from "motion/react";
 import Link from "next/link";
 
-/**
- * Plain anchors to the checkout route on purpose: it 302s to Dodo's hosted
- * checkout, which a client-side router would try to render instead of
- * following.
- */
-const CHECKOUT_HREF = "/api/sponsor-checkout";
+/** Plain anchors so the browser follows the hosted Stripe checkout. */
+const CHECKOUT_HREF = sponsorCheckoutUrl;
 const CLAIM_HREF = "/sponsor/claim";
-
-const enabledTiers = sponsorTiers.filter((tier) => tier.enabled !== false);
-const seatPrice = enabledTiers[0]?.price ?? 5;
 
 const X_URL =
   socialsConfig.find((social) => social.id === "x")?.href ??
@@ -95,7 +88,7 @@ export function SponsorPage() {
                 className={primaryActionClass}
                 onClick={() => trackCta("hero", "checkout")}
               >
-                Take a seat, ${seatPrice}
+                Pay with Stripe
                 <ArrowRight aria-hidden className="size-4" />
               </a>
               <Link
@@ -196,7 +189,7 @@ export function SponsorPage() {
               className={cn(primaryActionClass, "w-full sm:w-auto")}
               onClick={() => trackCta("footer", "checkout")}
             >
-              Take a seat, ${seatPrice}
+              Pay with Stripe
               <ArrowRight aria-hidden className="size-4" />
             </a>
             <Link

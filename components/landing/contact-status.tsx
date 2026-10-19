@@ -15,9 +15,9 @@ const linkedinSocial = socialsConfig.find((social) => social.id === "linkedin");
  */
 export function ContactStatus() {
   const href =
-    linkedinSocial?.href ?? emailSocial?.href ?? "mailto:support@ummahsignal.com";
+    linkedinSocial?.href ?? emailSocial?.href ?? "mailto:contact@byrehan.dev";
   const handle =
-    linkedinSocial?.handle ?? emailSocial?.handle ?? "support@ummahsignal.com";
+    linkedinSocial?.handle ?? emailSocial?.handle ?? "contact@byrehan.dev";
   const isLinkedIn = Boolean(linkedinSocial?.href);
 
   return (
@@ -42,7 +42,12 @@ export function ContactStatus() {
           Building in public.
         </p>
         <p className="truncate text-[11px] leading-tight text-muted-foreground">
-          LinkedIn or email works.
+          <a
+            href={emailSocial?.href ?? "mailto:contact@byrehan.dev"}
+            className="hover:text-foreground"
+          >
+            {emailSocial?.handle ?? "contact@byrehan.dev"}
+          </a>
         </p>
       </div>
       <Link

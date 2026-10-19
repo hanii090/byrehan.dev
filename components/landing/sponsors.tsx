@@ -10,7 +10,6 @@ import {
 import {
   getAllSponsors,
   getEnabledSponsors,
-  sponsorTiers,
   sponsorsSectionConfig,
 } from "@/config/sponsors";
 import type { Sponsor } from "@/config/types";
@@ -19,16 +18,13 @@ import { cn } from "@/lib/utils";
 import { Plus } from "@/components/shared/site-icons";
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import Link from "next/link";
 
-const MotionLink = motion.create(Link);
 const badgeSpring = { type: "spring", duration: 0.35, bounce: 0.3 } as const;
-const SEAT_PRICE_LABEL = `$${sponsorTiers.find((tier) => tier.enabled !== false)?.price ?? sponsorTiers[0]?.price ?? 5}`;
 
 function withReferral(url: string) {
   try {
     const parsed = new URL(url);
-    parsed.searchParams.set("utm_source", "akoder.xyz");
+    parsed.searchParams.set("utm_source", "byrehan.dev");
     parsed.searchParams.set("utm_medium", "sponsor");
     return parsed.toString();
   } catch {
@@ -58,7 +54,7 @@ export function EmitRays({ className }: { className?: string }) {
 
 function SponsorList({ sponsors }: { sponsors: Sponsor[] }) {
   const reduceMotion = useReducedMotion();
-  const { supportLabel, supportNote } = sponsorsSectionConfig;
+  const { supportLabel, supportNote, supportUrl } = sponsorsSectionConfig;
   const gestures = {
     initial: false,
     whileHover: reduceMotion ? { opacity: 0.8 } : { y: -4, scale: 1.08, rotate: -5 },
@@ -140,21 +136,29 @@ function SponsorList({ sponsors }: { sponsors: Sponsor[] }) {
         <li className="shrink-0">
           <Tooltip>
             <TooltipTrigger asChild>
-              <MotionLink
-                href="/sponsor"
+              <motion.a
+                href={supportUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={supportLabel}
                 className={cn(
                   badgeClass,
                   "border border-muted-foreground/30 bg-background/60 text-muted-foreground transition-colors hover:border-border hover:bg-secondary hover:text-secondary-foreground",
                 )}
                 {...gestures}
+                onClick={() =>
+                  trackEvent("sponsor_checkout_clicked", {
+                    url: supportUrl,
+                    location: "home_sponsors",
+                  })
+                }
               >
                 <Plus className="size-4" aria-hidden />
-              </MotionLink>
+              </motion.a>
             </TooltipTrigger>
             <TooltipContent sideOffset={8} className="flex-col gap-0.5 font-mono text-[11px] font-normal">
               <span>{supportLabel}</span>
-              <span className="opacity-70">{SEAT_PRICE_LABEL} · {supportNote}</span>
+              <span className="opacity-70">{supportNote}</span>
             </TooltipContent>
           </Tooltip>
         </li>
