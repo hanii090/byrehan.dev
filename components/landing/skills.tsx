@@ -3,24 +3,28 @@ import type { SkillIcon, SkillItem } from "@/config/types";
 import { cn } from "@/lib/utils";
 import AiSdk from "@/public/stacks/ai-sdk";
 import AuthIcon from "@/public/stacks/auth";
+import ConvexIcon from "@/public/stacks/convex";
 import CursorIcon from "@/public/stacks/cursor";
 import NextjsIcon from "@/public/stacks/nextjs";
 import PrismaIcon from "@/public/stacks/prisma";
 import ReactIcon from "@/public/stacks/react";
 import ShadcnIcon from "@/public/stacks/shadcn";
+import SwiftUiIcon from "@/public/stacks/swiftui";
 import TailwindIcon from "@/public/stacks/tailwind";
 import TrpcIcon from "@/public/stacks/trcp";
 import TSIcon from "@/public/stacks/ts";
 import JSIcon from "@/public/stacks/js";
 import type { ComponentType } from "react";
 import { BsClaude } from "react-icons/bs";
-import { SiReactquery } from "react-icons/si";
+import { SiReactquery, SiSupabase, SiSwift } from "react-icons/si";
 
 const skillIconMap: Record<SkillIcon, ComponentType<{ size: string }>> = {
   nextjs: NextjsIcon,
   react: ReactIcon,
   typescript: TSIcon,
   javascript: JSIcon,
+  swift: SiSwift,
+  swiftui: SwiftUiIcon,
   tailwind: TailwindIcon,
   shadcn: ShadcnIcon,
   "better-auth": AuthIcon,
@@ -29,6 +33,8 @@ const skillIconMap: Record<SkillIcon, ComponentType<{ size: string }>> = {
   tanstack: SiReactquery,
   prisma: PrismaIcon,
   trpc: TrpcIcon,
+  convex: ConvexIcon,
+  supabase: SiSupabase,
   cursor: CursorIcon,
 };
 

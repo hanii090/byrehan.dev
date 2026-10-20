@@ -28,11 +28,19 @@ export const skillsConfig: SkillItem[] = [
     enabled: true,
   },
   {
+    id: "swift",
+    name: "Swift",
+    icon: "swift",
+    category: "language",
+    order: 3,
+    enabled: true,
+  },
+  {
     id: "nextjs",
     name: "Next.js",
     icon: "nextjs",
     category: "frontend",
-    order: 3,
+    order: 4,
     enabled: true,
   },
   {
@@ -40,7 +48,15 @@ export const skillsConfig: SkillItem[] = [
     name: "React",
     icon: "react",
     category: "frontend",
-    order: 4,
+    order: 5,
+    enabled: true,
+  },
+  {
+    id: "swiftui",
+    name: "SwiftUI",
+    icon: "swiftui",
+    category: "frontend",
+    order: 6,
     enabled: true,
   },
   {
@@ -48,7 +64,7 @@ export const skillsConfig: SkillItem[] = [
     name: "Tailwind CSS",
     icon: "tailwind",
     category: "frontend",
-    order: 5,
+    order: 7,
     enabled: true,
   },
   {
@@ -56,7 +72,23 @@ export const skillsConfig: SkillItem[] = [
     name: "shadcn/ui",
     icon: "shadcn",
     category: "frontend",
-    order: 6,
+    order: 8,
+    enabled: true,
+  },
+  {
+    id: "convex",
+    name: "Convex",
+    icon: "convex",
+    category: "backend",
+    order: 9,
+    enabled: true,
+  },
+  {
+    id: "supabase",
+    name: "Supabase",
+    icon: "supabase",
+    category: "backend",
+    order: 10,
     enabled: true,
   },
   {
@@ -64,7 +96,7 @@ export const skillsConfig: SkillItem[] = [
     name: "Prisma",
     icon: "prisma",
     category: "backend",
-    order: 7,
+    order: 11,
     enabled: true,
   },
   {
@@ -72,7 +104,7 @@ export const skillsConfig: SkillItem[] = [
     name: "TRPC",
     icon: "trpc",
     category: "backend",
-    order: 8,
+    order: 12,
     enabled: true,
   },
   {
@@ -80,7 +112,7 @@ export const skillsConfig: SkillItem[] = [
     name: "better-auth",
     icon: "better-auth",
     category: "backend",
-    order: 9,
+    order: 13,
     enabled: true,
   },
   {
@@ -88,7 +120,7 @@ export const skillsConfig: SkillItem[] = [
     name: "Cursor",
     icon: "cursor",
     category: "workflow-ai",
-    order: 10,
+    order: 14,
     enabled: true,
   },
   {
@@ -96,7 +128,7 @@ export const skillsConfig: SkillItem[] = [
     name: "AI SDK",
     icon: "ai-sdk",
     category: "workflow-ai",
-    order: 11,
+    order: 15,
     enabled: true,
   },
   {
@@ -104,7 +136,7 @@ export const skillsConfig: SkillItem[] = [
     name: "Claude",
     icon: "claude",
     category: "workflow-ai",
-    order: 12,
+    order: 16,
     enabled: true,
   },
 ];
