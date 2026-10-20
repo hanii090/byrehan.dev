@@ -1,11 +1,10 @@
 import { type LanyardData } from "@/lib/discord-status";
 import { NextResponse } from "next/server";
 
-const rawUserId = process.env.DISCORD_USER_ID ?? "1243105196477911061";
-// Discord snowflakes are 17-20 digit numeric strings
-const DISCORD_USER_ID = /^\d{17,20}$/.test(rawUserId)
-  ? rawUserId
-  : "1243105196477911061";
+const rawUserId = process.env.DISCORD_USER_ID ?? "";
+// Discord snowflakes are 17-20 digit numeric strings. No fallback account:
+// the previous default belonged to t1x_faker, which is not this site.
+const DISCORD_USER_ID = /^\d{17,20}$/.test(rawUserId) ? rawUserId : null;
 export const revalidate = 60;
 
 const NO_CACHE_HEADERS = {
@@ -13,6 +12,13 @@ const NO_CACHE_HEADERS = {
 };
 
 export async function GET() {
+  if (!DISCORD_USER_ID) {
+    return NextResponse.json(
+      { error: "Discord status is not configured." },
+      { status: 404, headers: NO_CACHE_HEADERS },
+    );
+  }
+
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 5000);

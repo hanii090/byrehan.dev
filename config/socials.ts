@@ -72,11 +72,13 @@ export const socialsConfig: SocialLink[] = [
   {
     id: "discord",
     platform: "Discord",
-    handle: "",
+    handle: "t1x_zijra",
+    copyValue: "t1x_zijra",
     icon: "discord",
     action: "copy",
+    tooltipDefault: "Copy Discord",
     order: 7,
-    enabled: false,
+    enabled: true,
   },
   {
     id: "reddit",

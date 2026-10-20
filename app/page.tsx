@@ -118,7 +118,14 @@ export default function Home() {
           { id: "hero", label: "Top" },
           ...visibleSections.map((id) => ({
             id,
-            label: id === "github" ? "GitHub" : `${id.charAt(0).toUpperCase()}${id.slice(1)}`,
+            label:
+              id === "github"
+                ? "GitHub"
+                : id === "testimonials"
+                  ? "Community"
+                  : id === "certifications"
+                    ? "Certificates"
+                    : `${id.charAt(0).toUpperCase()}${id.slice(1)}`,
           })),
         ]}
       />

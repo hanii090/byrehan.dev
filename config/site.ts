@@ -2,6 +2,7 @@ import { socialsConfig } from "@/config/socials";
 import type { AboutGreetings, AboutItem, FooterConfig, PortfolioConfig } from "@/config/types";
 import SoloLearnIcon from "@/public/sololearn-icon";
 import BrandNextjs from "@/public/stacks/nextjs";
+import TavilyIcon from "@/public/tavily-icon";
 import X from "@/public/x-icon";
 import { BookmarkCheckIcon } from "@/components/shared/site-icons";
 import { FaYoutube } from "react-icons/fa";
@@ -142,6 +143,8 @@ export const siteConfig: PortfolioConfig = {
     "skills",
     "about",
     "experience",
+    "certifications",
+    "testimonials",
     "bookmarks",
     "sponsors",
     "github",
@@ -151,10 +154,10 @@ export const siteConfig: PortfolioConfig = {
     skills: true,
     components: false,
     about: true,
-    testimonials: false,
+    testimonials: true,
     projects: true,
     bookmarks: true,
-    certifications: false,
+    certifications: true,
     sponsors: true,
     experience: true,
     services: false,
@@ -259,8 +262,15 @@ export const siteConfig: PortfolioConfig = {
     title: "Certificates",
     items: [
       {
+        id: "certificate-tavily",
+        url: "/certificates/tavily-web-search-api.webp",
+        title: "Tavily: Web Search API",
+        domain: "tavily.com",
+        icon: TavilyIcon,
+      },
+      {
         id: "certificate-1",
-        url: "https://www.theforage.com/completion-certificates/Zbnc2o4ok6kD2NEXx/EuvC8GPjkZ6xaiP9p_Zbnc2o4ok6kD2NEXx_693ce0449f6548245819491e_1765744610923_completion_certificate.pdf",
+        url: "/certificates/forage-data-science.pdf",
         title: "Lloyds Banking Group — Data Science Job Simulation",
         domain: "theforage.com",
         date: "2025",
