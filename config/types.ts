@@ -150,6 +150,8 @@ export type SkillIcon =
   | "react"
   | "typescript"
   | "javascript"
+  | "swift"
+  | "swiftui"
   | "tailwind"
   | "ai-sdk"
   | "shadcn"
@@ -157,6 +159,8 @@ export type SkillIcon =
   | "prisma"
   | "trpc"
   | "tanstack"
+  | "convex"
+  | "supabase"
   | "claude"
   | "cursor";
 
