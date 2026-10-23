@@ -4,24 +4,32 @@ type SwiftUiProps = {
   size: string;
 };
 
-/* SwiftUI shares the Swift bird. The rounded frame is the app-icon shape,
-   so the chip reads as the UI framework rather than a second language logo. */
-const SwiftUi = ({ size }: SwiftUiProps) => (
-  <span
-    aria-hidden="true"
-    style={{
-      width: size,
-      height: size,
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      border: "1.4px solid currentColor",
-      borderRadius: 5,
-      flexShrink: 0,
-    }}
-  >
-    <SiSwift size="68%" />
-  </span>
-);
+/* Pixel sizes only. A percentage, or a unitless CSS length, lets the Swift
+   plate grow to the width of the page and blows the stack row open. */
+const SwiftUi = ({ size }: SwiftUiProps) => {
+  const parsed = Number.parseFloat(size);
+  const frame = Number.isFinite(parsed) ? parsed : 18;
+  const mark = Math.max(10, Math.round(frame * 0.68));
+
+  return (
+    <span
+      aria-hidden="true"
+      style={{
+        width: frame,
+        height: frame,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+        lineHeight: 0,
+        boxSizing: "border-box",
+        border: "1.25px solid currentColor",
+        borderRadius: 4,
+      }}
+    >
+      <SiSwift size={mark} />
+    </span>
+  );
+};
 
 export default SwiftUi;
