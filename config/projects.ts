@@ -93,22 +93,44 @@ export const projectsConfig: Project[] = [
   },
   {
     id: "zijra",
-    title: "Zijra — Coming soon",
+    title: "Zijra — Privacy-first analytics, revenue included",
     description:
-      "A new product under zijra.com. Details soon.",
+      "See which visits pay. Cookieless analytics with Stripe revenue on every plan, free for the first 10,000 events a month.",
     content:
-      "## Status\nZijra is in early exploration. The domain is reserved and the product direction is taking shape.\n\n## Next\nPublic details will land here when the first build is ready to share.",
+      "## Problem\nFounders pay for analytics and still cannot see which visits turn into Stripe revenue without moving to a bigger plan.\n\n## Solution\nZijra pairs cookieless aggregate tracking with Stripe revenue attribution on every plan, including Free. Goals, funnels, and journeys sit next to the traffic that produced them. API and MCP access start on the paid plans.\n\n## Outcome\nLive at zijra.com. Free for 10,000 events a month with no card, then $5 a month for 100,000 events.",
     image: "/zijra.png",
-    imageAlt: "Zijra coming soon",
+    imageAlt: "Zijra privacy-first analytics",
     liveUrl: "https://zijra.com",
-    tags: ["Coming soon"],
+    tags: ["Analytics", "Privacy", "Stripe", "SaaS"],
     metrics: [
-      { icon: "chart", label: "Coming soon" },
+      { icon: "chart", label: "10,000 events free" },
+      { icon: "users", label: "Stripe revenue included" },
     ],
     year: 2026,
-    status: "building",
-    category: "Product",
+    status: "shipped",
+    category: "Analytics",
     order: 5,
+    enabled: true,
+  },
+  {
+    id: "raff",
+    title: "Raff — Your files. A clearer place.",
+    description:
+      "A native Mac file manager. Real folders, useful previews, and local tools for the details that matter before a handoff.",
+    content:
+      "## Problem\nEveryday files end up scattered across folders, downloads, and drives, and the details that matter before a handoff are easy to miss.\n\n## Solution\nRaff is a SwiftUI and AppKit file manager for macOS 27 on Apple silicon. It browses the real files on your Mac, previews them, and adds first-release local tools: Asset Lens for raster details and Folder Checkpoints for content comparisons. Workspaces gather references without moving the originals. File-changing commands stay locked until a licence is activated.\n\n## Outcome\nA £5.99 lifetime licence for one Mac, with no subscription. Desktop Shelves are still in compatibility testing and are not in this release.",
+    image: "/raff.png",
+    imageAlt: "Raff Mac file manager",
+    liveUrl: "https://meetraff.byrehan.dev",
+    tags: ["macOS", "SwiftUI", "Files", "Privacy"],
+    metrics: [
+      { icon: "chart", label: "£5.99 once" },
+      { icon: "users", label: "macOS 27 · Apple silicon" },
+    ],
+    year: 2026,
+    status: "new",
+    category: "Desktop",
+    order: 6,
     enabled: true,
   },
   {
