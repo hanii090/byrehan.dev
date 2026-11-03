@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { Plus } from "@/components/shared/site-icons";
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
+import { useRef } from "react";
 
 const badgeSpring = { type: "spring", duration: 0.35, bounce: 0.3 } as const;
 
@@ -52,6 +53,56 @@ export function EmitRays({ className }: { className?: string }) {
   );
 }
 
+const mobilePrograms = [
+  {
+    src: "/nvidia-inception.jpg",
+    label: "NVIDIA Inception Program",
+    soundSrc: "/coffee-cup.mp3",
+  },
+  {
+    src: "/mongodb-startups.png",
+    label: "MongoDB for Startups",
+    soundSrc: "/keyboard-click.mp3",
+  },
+  {
+    src: "/amplitude-startups.png",
+    label: "Amplitude Startup Program",
+    soundSrc: "/notebook-page-turn.mp3",
+  },
+] as const;
+
+function MobileProgramChip({
+  src,
+  label,
+  soundSrc,
+}: (typeof mobilePrograms)[number]) {
+  const reduceMotion = useReducedMotion();
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  return (
+    <li className="shrink-0 xl:hidden">
+      <motion.button
+        type="button"
+        aria-label={label}
+        className="flex h-10 items-center rounded-lg bg-white px-1.5 shadow-xs shadow-foreground/10 ring-1 ring-inset ring-border/70 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        initial={false}
+        whileHover={reduceMotion ? { opacity: 0.8 } : { y: -4, scale: 1.08, rotate: -5 }}
+        whileTap={reduceMotion ? { opacity: 0.65 } : { scale: 0.94, rotate: 3 }}
+        transition={badgeSpring}
+        onClick={() => {
+          const audio = audioRef.current;
+          if (!audio) return;
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        }}
+      >
+        <Image src={src} alt="" width={160} height={48} className="h-7 w-auto" />
+      </motion.button>
+      <audio ref={audioRef} src={soundSrc} preload="none" />
+    </li>
+  );
+}
+
 function SponsorList({ sponsors }: { sponsors: Sponsor[] }) {
   const reduceMotion = useReducedMotion();
   const { supportLabel, supportNote, supportUrl } = sponsorsSectionConfig;
@@ -68,6 +119,9 @@ function SponsorList({ sponsors }: { sponsors: Sponsor[] }) {
   return (
     <TooltipProvider delayDuration={100} disableHoverableContent>
       <ul className="no-scrollbar flex min-w-0 flex-1 items-center gap-2 overflow-x-auto px-1 py-2.5">
+        {mobilePrograms.map((program) => (
+          <MobileProgramChip key={program.label} {...program} />
+        ))}
         {sponsors.map((sponsor) => {
           const url = sponsor.url;
           const logo = (
