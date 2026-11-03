@@ -13,7 +13,7 @@ import styles from "./profile-banner.module.css";
 const pointerSpring = { stiffness: 350, damping: 24, mass: 0.6 };
 const gestureSpring = { type: "spring", duration: 0.35, bounce: 0.3 } as const;
 
-function InteractiveSticker({
+export function InteractiveSticker({
   src,
   alt,
   label,
