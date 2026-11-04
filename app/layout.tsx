@@ -183,6 +183,15 @@ export default function RootLayout({
           src="https://talvess.vercel.app/script.js"
           data-website-id="60de5aa9-eea8-4f05-b1d6-8a3d244d5644"
         />
+        <Script
+          src="https://zijra.com/tracker.js"
+          data-site-id="4f66bfb4-05e2-41bb-a858-9284ae6707e4"
+          data-ignore-query="true"
+          data-ignore-hash="true"
+          data-respect-privacy="true"
+          data-collection-mode="aggregate"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

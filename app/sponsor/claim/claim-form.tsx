@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 import { socialsConfig } from "@/config/socials";
 import { sponsorCheckoutUrl } from "@/config/sponsors";
 import { revealOnMount } from "@/lib/motion";
+import { trackZijra } from "@/lib/zijra";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -332,6 +333,7 @@ export function ClaimForm() {
       });
       setStatus("success");
       clearDraft();
+      trackZijra("sponsor_seat_claimed", { placement: "sponsor_claim" });
     } catch {
       setError({
         message: "The claim could not be saved. Check your connection and try again.",
