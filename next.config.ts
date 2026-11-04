@@ -19,11 +19,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://us-assets.i.posthog.com https://eu-assets.i.posthog.com https://talvess.vercel.app`,
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://us-assets.i.posthog.com https://eu-assets.i.posthog.com https://talvess.vercel.app https://zijra.com`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://i.scdn.co https://cdn.discordapp.com https://wsrv.nl https://flagcdn.com https://us.i.posthog.com https://eu.i.posthog.com",
       "font-src 'self' data:",
-      "connect-src 'self' https://api.github.com https://va.vercel-scripts.com https://vitals.vercel-insights.com https://us.i.posthog.com https://us-assets.i.posthog.com https://eu.i.posthog.com https://eu-assets.i.posthog.com https://talvess.vercel.app",
+      "connect-src 'self' https://api.github.com https://va.vercel-scripts.com https://vitals.vercel-insights.com https://us.i.posthog.com https://us-assets.i.posthog.com https://eu.i.posthog.com https://eu-assets.i.posthog.com https://talvess.vercel.app https://zijra.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",
