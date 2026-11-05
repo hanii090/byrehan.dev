@@ -29,6 +29,27 @@ export const projectsConfig: Project[] = [
     enabled: true,
   },
   {
+    id: "hej",
+    title: "hej — In-app support for iOS",
+    description:
+      "Help people get unstuck inside the app they already use. Human replies, useful next steps, and an honest review ask. Native iOS 17+.",
+    content:
+      "## Problem\nPeople get stuck on access, plans, and setup, then leave the app to find help.\n\n## Solution\nhej is native in-app support for iOS 17 and later, with SwiftUI and UIKit. A team inbox keeps the conversation, private notes, and app-scoped access together. Host-owned actions open a screen, a plan, or an optional review. AI drafts stay off until you configure them, and a person still decides what to send.\n\n## Outcome\nOne workspace for a family of apps. Early bird pricing is $15 a month or $150 a year, with no automatic overages.",
+    image: "/hej.jpg",
+    imageAlt: "hej in-app support conversation",
+    liveUrl: "https://tryhej.com",
+    tags: ["iOS", "Support", "SwiftUI", "SaaS"],
+    metrics: [
+      { icon: "chart", label: "$15 / month" },
+      { icon: "users", label: "Early bird" },
+    ],
+    year: 2026,
+    status: "early-bird",
+    category: "SaaS",
+    order: 2,
+    enabled: true,
+  },
+  {
     id: "dhikrbuddy",
     title: "DhikrBuddy — Notch companion for Mac",
     description:
@@ -46,7 +67,7 @@ export const projectsConfig: Project[] = [
     year: 2026,
     status: "shipped",
     category: "Desktop",
-    order: 2,
+    order: 3,
     enabled: true,
   },
   {
@@ -67,7 +88,7 @@ export const projectsConfig: Project[] = [
     year: 2026,
     status: "shipped",
     category: "Healthcare AI",
-    order: 3,
+    order: 4,
     enabled: true,
   },
   {
@@ -88,7 +109,7 @@ export const projectsConfig: Project[] = [
     year: 2026,
     status: "shipped",
     category: "Marketing AI",
-    order: 4,
+    order: 5,
     enabled: true,
   },
   {
@@ -109,7 +130,7 @@ export const projectsConfig: Project[] = [
     year: 2026,
     status: "shipped",
     category: "Analytics",
-    order: 5,
+    order: 6,
     enabled: true,
   },
   {
@@ -130,7 +151,7 @@ export const projectsConfig: Project[] = [
     year: 2026,
     status: "new",
     category: "Desktop",
-    order: 6,
+    order: 7,
     enabled: true,
   },
   {
@@ -151,7 +172,7 @@ export const projectsConfig: Project[] = [
     year: 2025,
     status: "shipped",
     category: "Desktop",
-    order: 6,
+    order: 7,
     enabled: true,
   },
   {
@@ -172,7 +193,7 @@ export const projectsConfig: Project[] = [
     year: 2025,
     status: "shipped",
     category: "Research AI",
-    order: 7,
+    order: 8,
     enabled: true,
   },
   {
@@ -193,7 +214,7 @@ export const projectsConfig: Project[] = [
     year: 2026,
     status: "shipped",
     category: "LegalTech",
-    order: 8,
+    order: 9,
     enabled: true,
   },
   {
@@ -214,7 +235,7 @@ export const projectsConfig: Project[] = [
     year: 2024,
     status: "shipped",
     category: "Desktop AI",
-    order: 9,
+    order: 10,
     enabled: true,
   },
   {
@@ -235,7 +256,7 @@ export const projectsConfig: Project[] = [
     year: 2026,
     status: "shipped",
     category: "Mobile",
-    order: 10,
+    order: 11,
     enabled: true,
   },
 ];

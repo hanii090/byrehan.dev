@@ -48,7 +48,16 @@ export function SiteCommandPalette({
         id: `project-${project.id}`,
         label: project.title,
         icon: <FolderOpen className="size-4" />,
-        keywords: ["project", "case study", project.category, project.id],
+        keywords: [
+          "project",
+          "case study",
+          project.category,
+          project.id,
+          ...project.tags,
+          ...(project.liveUrl
+            ? [new URL(project.liveUrl).hostname.replace(/^www\./, "")]
+            : []),
+        ],
         onSelect: go(`/project/${project.id}`),
       }));
 
