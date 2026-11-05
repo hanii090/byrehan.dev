@@ -15,7 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useId, useMemo, useState, useSyncExternalStore } from "react";
 
-export type ProjectStatus = "building" | "new" | "shipped";
+export type ProjectStatus = "building" | "new" | "early-bird" | "shipped";
 
 export interface ProjectExplorerItem {
   id: string;
@@ -164,25 +164,36 @@ function PaperFolderIcon({
 }
 
 function StatusBadge({ status }: { status: ProjectStatus }) {
-  if (status === "shipped") return null;
-
-  if (status === "building") {
-    return (
-      <span className="inline-flex shrink-0 items-center gap-1.5 rounded-sm bg-blue-500/10 px-1.5 py-0.5 font-sans text-[10px] leading-none text-blue-600 dark:text-blue-400">
-        <span className="relative flex size-1.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-60 motion-reduce:animate-none" />
-          <span className="relative inline-flex size-1.5 rounded-full bg-blue-500" />
+  switch (status) {
+    case "shipped":
+      return null;
+    case "building":
+      return (
+        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-sm bg-blue-500/10 px-1.5 py-0.5 font-sans text-[10px] leading-none text-blue-600 dark:text-blue-400">
+          <span className="relative flex size-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-60 motion-reduce:animate-none" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-blue-500" />
+          </span>
+          building&hellip;
         </span>
-        building&hellip;
-      </span>
-    );
+      );
+    case "new":
+      return (
+        <span className="inline-flex shrink-0 items-center rounded-sm bg-amber-500/10 px-1.5 py-0.5 font-sans text-[10px] leading-none text-amber-600 dark:text-amber-400">
+          new
+        </span>
+      );
+    case "early-bird":
+      return (
+        <span className="inline-flex shrink-0 items-center rounded-sm bg-emerald-500/10 px-1.5 py-0.5 font-sans text-[10px] leading-none text-emerald-700 dark:text-emerald-400">
+          early bird
+        </span>
+      );
+    default: {
+      const unreachable: never = status;
+      return unreachable;
+    }
   }
-
-  return (
-    <span className="inline-flex shrink-0 items-center rounded-sm bg-amber-500/10 px-1.5 py-0.5 font-sans text-[10px] leading-none text-amber-600 dark:text-amber-400">
-      new
-    </span>
-  );
 }
 
 interface PreviewHandlers {

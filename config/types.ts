@@ -206,7 +206,7 @@ export interface ProjectMetric {
   label: string;
 }
 
-export type ProjectStatus = "building" | "new" | "shipped";
+export type ProjectStatus = "building" | "new" | "early-bird" | "shipped";
 
 export interface Project {
   id: string;
