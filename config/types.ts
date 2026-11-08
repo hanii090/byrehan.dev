@@ -8,6 +8,7 @@ export type SectionId =
   | "about"
   | "testimonials"
   | "projects"
+  | "dead-ideas"
   | "experience"
   | "services"
   | "workflow"
@@ -206,7 +207,7 @@ export interface ProjectMetric {
   label: string;
 }
 
-export type ProjectStatus = "building" | "new" | "early-bird" | "shipped";
+export type ProjectStatus = "building" | "new" | "early-bird" | "shipped" | "dead";
 
 export interface Project {
   id: string;

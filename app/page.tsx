@@ -49,6 +49,13 @@ const explorerProjects: ProjectExplorerItem[] = projectsConfig.map(
   }),
 );
 
+const workProjects = explorerProjects.filter(
+  (project) => project.status !== "dead",
+);
+const deadProjects = explorerProjects.filter(
+  (project) => project.status === "dead",
+);
+
 const staticSections: Record<Exclude<SectionId, "github">, ReactElement> = {
   socials: <Social />,
   skills: <Skills />,
@@ -56,8 +63,14 @@ const staticSections: Record<Exclude<SectionId, "github">, ReactElement> = {
   testimonials: <Testimonials />,
   projects: (
     <HomeProjectExplorer
-      projects={explorerProjects}
+      projects={workProjects}
       title={projectsSectionConfig.title}
+    />
+  ),
+  "dead-ideas": (
+    <HomeProjectExplorer
+      projects={deadProjects}
+      title="Dead ideas"
     />
   ),
   components: <ComponentHighlights />,
@@ -127,9 +140,11 @@ export default function Home() {
                 ? "GitHub"
                 : id === "testimonials"
                   ? "Community"
-                  : id === "certifications"
+                  :               id === "certifications"
                     ? "Certificates"
-                    : `${id.charAt(0).toUpperCase()}${id.slice(1)}`,
+                    : id === "dead-ideas"
+                      ? "Dead ideas"
+                      : `${id.charAt(0).toUpperCase()}${id.slice(1)}`,
           })),
         ]}
       />

@@ -140,6 +140,7 @@ export const siteConfig: PortfolioConfig = {
   sectionOrder: [
     "socials",
     "projects",
+    "dead-ideas",
     "skills",
     "about",
     "experience",
@@ -155,6 +156,7 @@ export const siteConfig: PortfolioConfig = {
     about: true,
     testimonials: false,
     projects: true,
+    "dead-ideas": true,
     bookmarks: true,
     certifications: true,
     sponsors: true,
