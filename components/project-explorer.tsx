@@ -15,7 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useId, useMemo, useState, useSyncExternalStore } from "react";
 
-export type ProjectStatus = "building" | "new" | "early-bird" | "shipped";
+export type ProjectStatus = "building" | "new" | "early-bird" | "shipped" | "dead";
 
 export interface ProjectExplorerItem {
   id: string;
@@ -187,6 +187,12 @@ function StatusBadge({ status }: { status: ProjectStatus }) {
       return (
         <span className="inline-flex shrink-0 items-center rounded-sm bg-emerald-500/10 px-1.5 py-0.5 font-sans text-[10px] leading-none text-emerald-700 dark:text-emerald-400">
           early bird
+        </span>
+      );
+    case "dead":
+      return (
+        <span className="inline-flex shrink-0 items-center rounded-sm bg-muted px-1.5 py-0.5 font-sans text-[10px] leading-none text-muted-foreground">
+          dead
         </span>
       );
     default: {

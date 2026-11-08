@@ -57,6 +57,7 @@ export function SiteCommandPalette({
           ...(project.liveUrl
             ? [new URL(project.liveUrl).hostname.replace(/^www\./, "")]
             : []),
+          ...(project.status === "dead" ? ["dead", "dead idea"] : []),
         ],
         onSelect: go(`/project/${project.id}`),
       }));
