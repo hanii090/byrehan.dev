@@ -27,36 +27,90 @@ function bias(relative: number) {
   return Math.sign(relative) * 0.5;
 }
 
+const SPINE = 42;
+const COVER = 168;
+const GAP = 8;
+
+function placeTape(virtual: number, scroll: number, hover: number | null) {
+  const relative = wrap(virtual - scroll);
+  const openness = smoothstep(Math.max(0, 1 - Math.abs(relative)));
+  const x = relative * (SPINE + GAP) + (COVER - SPINE + GAP) * bias(relative);
+  const lifted = hover === virtual && Math.abs(relative) > 0.45 ? -16 : 0;
+  return {
+    relative,
+    hidden: Math.abs(x) > 820,
+    transform: `translate3d(${x}px, ${-openness * 14 + lifted}px, ${openness * 90}px) rotateZ(${-4.5 * openness}deg) rotateY(${-90 * openness}deg)`,
+    zIndex: String(Math.round(160 - Math.abs(relative) * 6 + openness * 40)),
+  };
+}
+
 export function BookShelf() {
   const reduceMotion = useReducedMotion();
   const target = useRef(START);
+  const scroll = useRef(START);
   const drag = useRef<{ x: number; origin: number; moved: boolean } | null>(null);
-  const coverRefs = useRef<Record<number, HTMLButtonElement | null>>({});
+  const hover = useRef<number | null>(null);
+  const tapeRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const sheetRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState(START);
-  const [hover, setHover] = useState<number | null>(null);
+  const pump = useRef<() => void>(() => {});
+  const [activeIndex, setActiveIndex] = useState(START % COUNT);
   const [open, setOpen] = useState<Book | null>(null);
-  const activeIndex = ((Math.round(position) % COUNT) + COUNT) % COUNT;
   const active = books[activeIndex] ?? books[0];
 
   useEffect(() => {
     let frame = 0;
     let last = performance.now();
-    let current = START;
+    let current = scroll.current;
+    let shown = ((Math.round(current) % COUNT) + COUNT) % COUNT;
+    const paint = (value: number) => {
+      const lifted = hover.current;
+      for (let virtual = 0; virtual < TOTAL; virtual += 1) {
+        const node = tapeRefs.current[virtual];
+        if (!node) continue;
+        const placed = placeTape(virtual, value, lifted);
+        node.style.visibility = placed.hidden ? "hidden" : "visible";
+        node.style.zIndex = placed.zIndex;
+        node.style.transform = placed.transform;
+      }
+    };
     const tick = (now: number) => {
+      frame = 0;
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      const rate = reduceMotion ? 80 : drag.current?.moved ? 18 : 5.2;
-      current += (target.current - current) * (1 - Math.exp(-rate * dt));
-      setPosition(current);
+      const delta = target.current - current;
+      const moving = Math.abs(delta) > 0.0008 || Boolean(drag.current?.moved);
+      if (moving) {
+        const rate = reduceMotion ? 80 : drag.current?.moved ? 18 : 5.2;
+        current += delta * (1 - Math.exp(-rate * dt));
+        if (Math.abs(target.current - current) < 0.0008 && !drag.current?.moved) {
+          current = target.current;
+        }
+        scroll.current = current;
+        const next = ((Math.round(current) % COUNT) + COUNT) % COUNT;
+        if (next !== shown) {
+          shown = next;
+          setActiveIndex(next);
+        }
+      }
+      paint(current);
+      if (moving) frame = requestAnimationFrame(tick);
+    };
+    pump.current = () => {
+      if (frame) return;
+      last = performance.now();
       frame = requestAnimationFrame(tick);
     };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+    paint(current);
+    pump.current();
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      pump.current = () => {};
+    };
   }, [reduceMotion]);
 
   const go = (next: number) => {
     target.current = next;
+    pump.current();
   };
 
   const openActive = () => {
@@ -67,7 +121,8 @@ export function BookShelf() {
 
   useEffect(() => {
     if (!open || reduceMotion) return;
-    const face = coverRefs.current[Math.round(target.current)];
+    const activeVirtual = ((Math.round(scroll.current) % TOTAL) + TOTAL) % TOTAL;
+    const face = tapeRefs.current[activeVirtual]?.querySelector("[data-cover]");
     const sheet = sheetRef.current;
     if (!face || !sheet) return;
     const from = face.getBoundingClientRect();
@@ -108,7 +163,10 @@ export function BookShelf() {
           if (!current) return;
           const dx = event.clientX - current.x;
           if (Math.abs(dx) > 5) current.moved = true;
-          if (current.moved) target.current = current.origin - dx / 90;
+          if (current.moved) {
+            target.current = current.origin - dx / 90;
+            pump.current();
+          }
         }}
         onPointerUp={() => {
           if (drag.current?.moved) target.current = Math.round(target.current);
@@ -118,68 +176,71 @@ export function BookShelf() {
           if (open) return;
           const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
           target.current += delta / 180;
+          pump.current();
         }}
       >
         <div className="absolute top-[46%] left-1/2 h-0 w-0" style={{ transformStyle: "preserve-3d" }}>
           {Array.from({ length: TOTAL }, (_, virtual) => {
             const book = books[virtual % COUNT] as Book;
-            const relative = wrap(virtual - position);
-            const openness = smoothstep(Math.max(0, 1 - Math.abs(relative)));
-            const spine = 42;
-            const cover = 168;
-            const gap = 8;
-            const x = relative * (spine + gap) + (cover - spine + gap) * bias(relative);
-            if (Math.abs(x) > 820) return null;
-            const lifted = hoverMatches(hover, virtual) && Math.abs(relative) > 0.45 ? -16 : 0;
+            const placed = placeTape(virtual, START, null);
             return (
               <button
                 key={virtual}
                 ref={(node) => {
-                  if (Math.abs(relative) < 0.35) coverRefs.current[virtual] = node;
+                  tapeRefs.current[virtual] = node;
                 }}
                 type="button"
                 aria-label={book.title}
                 className="absolute top-0 left-0 h-0 w-0 border-0 bg-transparent p-0"
                 style={{
-                  transform: `translate3d(${x}px, ${-openness * 14 + lifted}px, ${openness * 90}px) rotateZ(${-4.5 * openness}deg) rotateY(${-90 * openness}deg)`,
+                  transform: placed.transform,
                   transformStyle: "preserve-3d",
-                  zIndex: Math.round(160 - Math.abs(relative) * 6 + openness * 40),
+                  zIndex: Number(placed.zIndex),
+                  visibility: placed.hidden ? "hidden" : "visible",
                 }}
                 onClick={() => {
                   if (drag.current?.moved) return;
+                  const relative = wrap(virtual - scroll.current);
                   if (Math.abs(relative) < 0.5) openActive();
                   else go(Math.round(target.current + relative));
                 }}
-                onPointerEnter={() => setHover(virtual)}
-                onPointerLeave={() => setHover((current) => (current === virtual ? null : current))}
+                onPointerEnter={() => {
+                  hover.current = virtual;
+                  pump.current();
+                }}
+                onPointerLeave={() => {
+                  if (hover.current === virtual) hover.current = null;
+                  pump.current();
+                }}
               >
                 <span
                   aria-hidden
                   className="absolute block overflow-hidden rounded-[2px]"
                   style={{
-                    width: spine,
+                    width: SPINE,
                     height: 240,
-                    left: -spine / 2,
+                    left: -SPINE / 2,
                     top: -120,
                     backgroundImage: `linear-gradient(90deg, rgba(0,0,0,.28), transparent 30%), url(${book.cover})`,
                     backgroundSize: "auto 100%",
                     backgroundPosition: "left center",
-                    transform: `translateZ(${cover / 2}px)`,
+                    transform: `translateZ(${COVER / 2}px)`,
                     boxShadow: "0 16px 28px -20px rgba(20,16,10,.6)",
                   }}
                 />
                 <span
+                  data-cover=""
                   aria-hidden
                   className="absolute block overflow-hidden rounded-[2px]"
                   style={{
-                    width: cover,
+                    width: COVER,
                     height: 240,
-                    left: -cover / 2,
+                    left: -COVER / 2,
                     top: -120,
                     backgroundImage: `url(${book.cover})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    transform: `rotateY(90deg) translateZ(${spine / 2}px)`,
+                    transform: `rotateY(90deg) translateZ(${SPINE / 2}px)`,
                     backfaceVisibility: "hidden",
                     boxShadow: "0 30px 60px -28px rgba(20,16,10,.55)",
                   }}
@@ -230,8 +291,4 @@ export function BookShelf() {
       ) : null}
     </section>
   );
-}
-
-function hoverMatches(hover: number | null, virtual: number) {
-  return hover === virtual;
 }
