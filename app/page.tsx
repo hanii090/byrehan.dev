@@ -19,8 +19,6 @@ import { Skills } from "@/components/landing/skills";
 import Social from "@/components/landing/social";
 import { SponsorsSection } from "@/components/landing/sponsors";
 import { Testimonials } from "@/components/landing/testimonials";
-import { NvidiaInceptionMark } from "@/components/landing/nvidia-inception";
-import { SponsorProgramMarks } from "@/components/landing/sponsor-program-marks";
 import { Vader } from "@/components/landing/vader";
 import { SideNote } from "@/components/shared/side-note";
 import { projectsConfig, projectsSectionConfig } from "@/config/projects";
@@ -123,8 +121,6 @@ export default function Home() {
               className="relative bg-background scroll-mt-20"
             >
               {sectionId === "about" && <Vader />}
-              {sectionId === "projects" && <NvidiaInceptionMark />}
-              {sectionId === "sponsors" && <SponsorProgramMarks />}
               {note && <SideNote side={note.side}>{note.text}</SideNote>}
               {content}
             </div>
