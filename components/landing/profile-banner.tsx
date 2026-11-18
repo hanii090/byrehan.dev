@@ -159,6 +159,11 @@ export function ProfileBanner() {
           soundSrc={profileBannerConfig.profileSoundSrc}
         />
       </div>
+      <img
+        src="/images/og-lockup.jpg"
+        alt="Imagined by a human. Built with A.I."
+        className="mx-auto mt-6 w-full max-w-sm"
+      />
     </div>
   );
 }

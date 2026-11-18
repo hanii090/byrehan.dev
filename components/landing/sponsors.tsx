@@ -15,6 +15,7 @@ import {
 import type { Sponsor } from "@/config/types";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import { ProgramCards } from "@/components/landing/program-cards";
 import { Plus } from "@/components/shared/site-icons";
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
@@ -68,6 +69,11 @@ const mobilePrograms = [
     src: "/amplitude-startups.png",
     label: "Amplitude Startup Program",
     soundSrc: "/notebook-page-turn.mp3",
+  },
+  {
+    src: "/aws-startups.png",
+    label: "AWS Startups",
+    soundSrc: "/profile-pop.mp3",
   },
 ] as const;
 
@@ -230,6 +236,7 @@ export function SponsorsSection() {
 
   return (
     <section className="border-t border-dashed pt-6">
+      <ProgramCards />
       <div className="section-heading flex items-center px-0 py-0 pr-[17px]">
         <h2 className="no-js-visible shrink-0 px-[21px] py-px font-serif text-[25px] leading-8 font-medium italic">
           {heading}
