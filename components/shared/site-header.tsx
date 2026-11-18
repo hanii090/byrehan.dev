@@ -26,7 +26,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-3 sm:top-4 z-40 mx-auto -mb-8 flex w-full max-w-[var(--frame-max-w)] items-center justify-between px-6 pointer-events-none">
-      <div className="pointer-events-auto flex h-8 items-center overflow-hidden rounded-md border border-border/60 bg-background/60 text-muted-foreground shadow-xs backdrop-blur-md">
+      <div className="pointer-events-auto flex h-8 items-center overflow-hidden text-muted-foreground">
         <Tooltip>
           <TooltipTrigger asChild>
             <Link
