@@ -48,8 +48,8 @@ export function ProgramCards() {
                   src={program.src}
                   alt=""
                   width={160}
-                  height={48}
-                  className="h-8 w-auto"
+                  height={64}
+                  className="max-h-10 w-full object-contain"
                 />
               </span>
               <span className="min-w-0">

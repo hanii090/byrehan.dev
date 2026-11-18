@@ -85,7 +85,7 @@ export function BookShelf() {
 
   return (
     <section
-      className="relative overflow-hidden border-t border-dashed bg-[#f4efe6] pt-6 text-[#2a241f]"
+      className="relative overflow-hidden border-t border-dashed bg-background pt-6 text-foreground"
       aria-label="Book shelf"
       onKeyDown={(event) => {
         if (event.key === "ArrowRight") go(Math.round(target.current) + 1);
@@ -190,19 +190,19 @@ export function BookShelf() {
         </div>
       </div>
       <div aria-live="polite" className="px-6 pb-2 text-center">
-        <p className="font-serif text-3xl text-[#c46a3a]">{active.title}</p>
-        <p className="mt-1 text-[11px] tracking-[0.16em] text-[#6e645c] uppercase">
+        <p className="font-serif text-3xl text-primary">{active.title}</p>
+        <p className="mt-1 text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
           {active.author}
         </p>
       </div>
       <div className="flex items-center justify-between px-5 pb-6">
-        <button type="button" aria-label="Previous book" className="size-11 text-2xl text-[#c46a3a]" onClick={() => go(Math.round(target.current) - 1)}>
+        <button type="button" aria-label="Previous book" className="size-11 text-2xl text-primary" onClick={() => go(Math.round(target.current) - 1)}>
           ←
         </button>
-        <button type="button" aria-label="Open book" className="rounded-full border border-[#c46a3a] px-4 py-2 text-[10px] tracking-[0.16em] text-[#c46a3a] uppercase" onClick={openActive}>
+        <button type="button" aria-label="Open book" className="rounded-full border border-primary px-4 py-2 text-[10px] tracking-[0.16em] text-primary uppercase" onClick={openActive}>
           Open
         </button>
-        <button type="button" aria-label="Next book" className="size-11 text-2xl text-[#c46a3a]" onClick={() => go(Math.round(target.current) + 1)}>
+        <button type="button" aria-label="Next book" className="size-11 text-2xl text-primary" onClick={() => go(Math.round(target.current) + 1)}>
           →
         </button>
       </div>
@@ -212,16 +212,17 @@ export function BookShelf() {
           role="dialog"
           aria-modal="true"
           aria-label={open.title}
-          className="fixed inset-0 z-[80] overflow-y-auto bg-[#f7f3ec] text-[#2a241f]"
+          className="fixed inset-0 z-[80] cursor-pointer overflow-y-auto bg-background text-foreground"
+          onClick={() => setOpen(null)}
         >
           <div className="mx-auto grid min-h-full max-w-5xl items-center gap-8 px-6 py-16 md:grid-cols-[280px_1fr] md:px-12">
-            <img src={open.cover} alt="" className="mx-auto h-[70vh] max-h-[640px] w-auto object-contain shadow-[0_30px_60px_-28px_rgba(20,16,10,.55)]" />
+            <img src={open.cover} alt="" className="mx-auto block h-auto max-h-[72vh] w-auto max-w-full self-center shadow-[0_30px_60px_-28px_rgba(20,16,10,.55)]" />
             <div>
-              <button type="button" className="border border-[#2a241f] px-3 py-1 text-[10px] tracking-[0.14em] uppercase" onClick={() => setOpen(null)}>
+              <button type="button" className="border border-foreground px-3 py-1 text-[10px] tracking-[0.14em] uppercase" onClick={() => setOpen(null)}>
                 Close
               </button>
-              <h3 className="mt-6 font-serif text-5xl text-[#c46a3a]">{open.title}</h3>
-              <p className="mt-3 text-sm tracking-wide text-[#6e645c]">{open.author}</p>
+              <h3 className="mt-6 font-serif text-5xl text-primary">{open.title}</h3>
+              <p className="mt-3 text-sm tracking-wide text-muted-foreground">{open.author}</p>
               <p className="mt-6 max-w-md text-base leading-relaxed">{open.note}</p>
             </div>
           </div>
