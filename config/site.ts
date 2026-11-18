@@ -81,7 +81,7 @@ export const siteConfig: PortfolioConfig = {
       alt: "Rehan Aslam — building AI products that ship",
     },
     twitterCreator: "@haani0090",
-    icon: "/favicon.svg",
+    icon: "/mark-r.png",
     appleIcon: "/apple-touch-icon.png",
     googleVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "",
     manifest: {
@@ -91,8 +91,8 @@ export const siteConfig: PortfolioConfig = {
         "Rehan builds AI products and privacy-first apps from Canterbury, UK.",
       start_url: "/",
       display: "standalone",
-      background_color: "#fafafa",
-      theme_color: "#18181b",
+      background_color: "#f4efe6",
+      theme_color: "#2a241f",
       icons: [
         {
           src: "/favicon.ico",
@@ -127,8 +127,8 @@ export const siteConfig: PortfolioConfig = {
     fullName: "Rehan Aslam",
     firstName: "Rehan",
     avatar: {
-      src: "/images/profile-cutout.webp",
-      alt: "Illustrated portrait of Rehan waving with a laptop",
+      src: "/images/rehan.png",
+      alt: "Illustrated portrait of Rehan in a cap and hoodie",
       fallback: "RA",
     },
     location: {
@@ -146,6 +146,7 @@ export const siteConfig: PortfolioConfig = {
     "experience",
     "certifications",
     "bookmarks",
+    "books",
     "sponsors",
     "github",
   ],
@@ -158,6 +159,7 @@ export const siteConfig: PortfolioConfig = {
     projects: true,
     "dead-ideas": true,
     bookmarks: true,
+    books: true,
     certifications: true,
     sponsors: true,
     experience: true,

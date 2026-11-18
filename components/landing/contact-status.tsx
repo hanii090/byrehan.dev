@@ -15,9 +15,9 @@ const linkedinSocial = socialsConfig.find((social) => social.id === "linkedin");
  */
 export function ContactStatus() {
   const href =
-    linkedinSocial?.href ?? emailSocial?.href ?? "mailto:support@ummahsignal.com";
+    linkedinSocial?.href ?? emailSocial?.href ?? "mailto:rehan@ummahsignal.com";
   const handle =
-    linkedinSocial?.handle ?? emailSocial?.handle ?? "support@ummahsignal.com";
+    linkedinSocial?.handle ?? emailSocial?.handle ?? "rehan@ummahsignal.com";
   const isLinkedIn = Boolean(linkedinSocial?.href);
 
   return (
@@ -43,10 +43,10 @@ export function ContactStatus() {
         </p>
         <p className="truncate text-[11px] leading-tight text-muted-foreground">
           <a
-            href={emailSocial?.href ?? "mailto:support@ummahsignal.com"}
+            href={emailSocial?.href ?? "mailto:rehan@ummahsignal.com"}
             className="hover:text-foreground"
           >
-            {emailSocial?.handle ?? "support@ummahsignal.com"}
+            {emailSocial?.handle ?? "rehan@ummahsignal.com"}
           </a>
         </p>
       </div>

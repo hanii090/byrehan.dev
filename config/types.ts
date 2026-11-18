@@ -14,6 +14,7 @@ export type SectionId =
   | "workflow"
   | "github"
   | "bookmarks"
+  | "books"
   | "certifications"
   | "sponsors"
   | "contact";

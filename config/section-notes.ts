@@ -1,6 +1,10 @@
 import type { SectionId, SectionNoteConfig } from "@/config/types";
 
 export const sectionNotes: Partial<Record<SectionId, SectionNoteConfig>> = {
+  books: {
+    text: "Books I keep\ncoming back to",
+    side: "right",
+  },
   components: {
     text: "Copy, paste,\nmake it yours",
     side: "right",

@@ -1,4 +1,5 @@
 import { About } from "@/components/landing/about";
+import { BookShelf } from "@/components/landing/book-shelf";
 import { Bookmarks } from "@/components/landing/bookmarks";
 import { Campfire } from "@/components/landing/campfire";
 import { Certifications } from "@/components/landing/certifications";
@@ -75,6 +76,7 @@ const staticSections: Record<Exclude<SectionId, "github">, ReactElement> = {
   ),
   components: <ComponentHighlights />,
   bookmarks: <Bookmarks />,
+  books: <BookShelf />,
   certifications: <Certifications />,
   sponsors: <SponsorsSection />,
   experience: <Experience />,
@@ -144,7 +146,9 @@ export default function Home() {
                     ? "Certificates"
                     : id === "dead-ideas"
                       ? "Dead ideas"
-                      : `${id.charAt(0).toUpperCase()}${id.slice(1)}`,
+                      : id === "books"
+                        ? "Books"
+                        : `${id.charAt(0).toUpperCase()}${id.slice(1)}`,
           })),
         ]}
       />
