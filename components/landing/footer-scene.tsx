@@ -155,7 +155,17 @@ export function FooterScene({ children }: { children: ReactNode }) {
           width={footerConfig.artwork.width}
           height={footerConfig.artwork.height}
           sizes="100vw"
-          className="block h-auto w-full max-w-none"
+          className="block h-auto w-full max-w-none dark:hidden"
+          draggable={false}
+          priority={false}
+        />
+        <Image
+          src="/images/footer-garden-strip-dark.webp"
+          alt=""
+          width={footerConfig.artwork.width}
+          height={footerConfig.artwork.height}
+          sizes="100vw"
+          className="hidden h-auto w-full max-w-none dark:block"
           draggable={false}
           priority={false}
         />

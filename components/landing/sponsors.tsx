@@ -102,7 +102,7 @@ function MobileProgramChip({
           audio.play().catch(() => {});
         }}
       >
-        <Image src={src} alt="" width={160} height={48} className="h-7 w-auto" />
+        <Image src={src} alt="" width={160} height={48} className="h-8 w-auto max-w-[8.5rem] object-contain" />
       </motion.button>
       <audio ref={audioRef} src={soundSrc} preload="none" />
     </li>
