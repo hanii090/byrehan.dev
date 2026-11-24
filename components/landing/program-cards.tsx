@@ -32,7 +32,7 @@ export function ProgramCards() {
     <div className="border-b border-dashed px-6 py-5">
       <h2 className="font-serif text-2xl italic leading-tight">Programs</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        UmmahSignal is in these startup programs.
+        Nabyu is in these startup programs.
       </p>
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">
         {programs.map((program) => (

@@ -53,7 +53,7 @@ export const siteConfig: PortfolioConfig = {
     titleTemplate: "%s | Rehan Aslam",
     shortTitle: "Rehan Aslam",
     description:
-      "Rehan builds AI products and privacy-first apps for clinicians, marketers, and everyday people. Founder of UmmahSignal and Sorca. Based in Canterbury, UK.",
+      "Rehan builds AI products and privacy-first apps for clinicians, marketers, and everyday people. Founder of Nabyu and Sorca. Based in Canterbury, UK.",
     keywords: [
       "Rehan Aslam",
       "AI products",
@@ -62,7 +62,7 @@ export const siteConfig: PortfolioConfig = {
       "React",
       "TypeScript",
       "SwiftUI",
-      "UmmahSignal",
+      "Nabyu",
       "Sorca",
       "Canterbury",
       "UK GDPR",

@@ -9,13 +9,13 @@ export const projectsSectionConfig = {
 export const projectsConfig: Project[] = [
   {
     id: "ummahsignal",
-    title: "UmmahSignal — Social listening for brands",
+    title: "Nabyu — Social listening for brands",
     description:
       "Know what the internet says about your brand, app, or organisation. Find the conversations that matter, understand recurring feedback, and make sure someone handles it.",
     content:
-      "## Problem\nPublic questions, bug reports, and praise scatter across X, YouTube, and other platforms. Teams miss replies, lose context, and burn out trying to stay online.\n\n## Solution\nUmmahSignal brings supported public conversations into one review workflow. Configure keywords, collect mentions from live sources, triage what needs action, and keep ownership clear without autonomous replies.\n\n## Outcome\nAn invite-only beta for founders, brands, creators, and community teams who need signal over noise, with human review at every step.",
+      "## Problem\nPublic questions, bug reports, and praise scatter across X, YouTube, and other platforms. Teams miss replies, lose context, and burn out trying to stay online.\n\n## Solution\nNabyu brings supported public conversations into one review workflow. Configure keywords, collect mentions from live sources, triage what needs action, and keep ownership clear without autonomous replies.\n\n## Outcome\nAn invite-only beta for founders, brands, creators, and community teams who need signal over noise, with human review at every step.",
     image: "/ummahsignal.png",
-    imageAlt: "UmmahSignal social listening product",
+    imageAlt: "Nabyu social listening product",
     liveUrl: "https://nabyu.com",
     tags: ["SaaS", "Social listening", "AI", "Next.js"],
     metrics: [
