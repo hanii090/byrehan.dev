@@ -2,7 +2,7 @@
 
 this is my portfolio at [byrehan.dev](https://byrehan.dev).
 
-i build AI products and privacy-first apps for clinicians, marketers, and everyday people. founder work includes UmmahSignal, Sorca, and consumer apps on the App Store.
+i build AI products and privacy-first apps for clinicians, marketers, and everyday people. founder work includes Nabyu, Sorca, and consumer apps on the App Store.
 
 ## the stack
 
