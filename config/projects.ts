@@ -16,7 +16,7 @@ export const projectsConfig: Project[] = [
       "## Problem\nPublic questions, bug reports, and praise scatter across X, YouTube, and other platforms. Teams miss replies, lose context, and burn out trying to stay online.\n\n## Solution\nUmmahSignal brings supported public conversations into one review workflow. Configure keywords, collect mentions from live sources, triage what needs action, and keep ownership clear without autonomous replies.\n\n## Outcome\nAn invite-only beta for founders, brands, creators, and community teams who need signal over noise, with human review at every step.",
     image: "/ummahsignal.png",
     imageAlt: "UmmahSignal social listening product",
-    liveUrl: "https://ummahsignal.com",
+    liveUrl: "https://nabyu.com",
     tags: ["SaaS", "Social listening", "AI", "Next.js"],
     metrics: [
       { icon: "chart", label: "X + YouTube live" },
