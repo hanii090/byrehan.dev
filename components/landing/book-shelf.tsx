@@ -31,6 +31,7 @@ export function BookShelf() {
   const reduceMotion = useReducedMotion();
   const target = useRef(START);
   const drag = useRef<{ x: number; origin: number; moved: boolean } | null>(null);
+  const pump = useRef<() => void>(() => {});
   const coverRefs = useRef<Record<number, HTMLButtonElement | null>>({});
   const sheetRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(START);
@@ -46,17 +47,38 @@ export function BookShelf() {
     const tick = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      const rate = reduceMotion ? 80 : drag.current?.moved ? 18 : 5.2;
-      current += (target.current - current) * (1 - Math.exp(-rate * dt));
-      setPosition(current);
+      const delta = target.current - current;
+      const dragging = Boolean(drag.current?.moved);
+      if (Math.abs(delta) > 0.0008 || dragging) {
+        const rate = reduceMotion ? 80 : dragging ? 18 : 5.2;
+        current += delta * (1 - Math.exp(-rate * dt));
+        if (!dragging && Math.abs(target.current - current) < 0.0008) {
+          current = target.current;
+        }
+        setPosition(current);
+        frame = requestAnimationFrame(tick);
+        return;
+      }
+      if (current !== target.current) {
+        current = target.current;
+        setPosition(current);
+      }
+      frame = 0;
+    };
+    pump.current = () => {
+      if (frame) return;
+      last = performance.now();
       frame = requestAnimationFrame(tick);
     };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      pump.current = () => {};
+    };
   }, [reduceMotion]);
 
   const go = (next: number) => {
     target.current = next;
+    pump.current();
   };
 
   const openActive = () => {
@@ -108,16 +130,23 @@ export function BookShelf() {
           if (!current) return;
           const dx = event.clientX - current.x;
           if (Math.abs(dx) > 5) current.moved = true;
-          if (current.moved) target.current = current.origin - dx / 90;
+          if (current.moved) {
+            target.current = current.origin - dx / 90;
+            pump.current();
+          }
         }}
         onPointerUp={() => {
-          if (drag.current?.moved) target.current = Math.round(target.current);
+          if (drag.current?.moved) {
+            target.current = Math.round(target.current);
+            pump.current();
+          }
           drag.current = null;
         }}
         onWheel={(event) => {
           if (open) return;
           const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
           target.current += delta / 180;
+          pump.current();
         }}
       >
         <div className="absolute top-[46%] left-1/2 h-0 w-0" style={{ transformStyle: "preserve-3d" }}>

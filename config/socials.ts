@@ -51,8 +51,8 @@ export const socialsConfig: SocialLink[] = [
   {
     id: "email",
     platform: "Email",
-    handle: "rehan@ummahsignal.com",
-    href: "mailto:rehan@ummahsignal.com",
+    handle: "rehan@nabyu.com",
+    href: "mailto:rehan@nabyu.com",
     icon: "gmail",
     action: "mailto",
     tooltipDefault: "Send email",
